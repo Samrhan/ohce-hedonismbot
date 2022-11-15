@@ -1,14 +1,16 @@
-const test = require('tape')
 const Greeter = require('../greeter').Greeter
 
-test('should say "good night" at midnight', (t) => {
-  t.fail('TODO')
-  t.end()
+describe('Greeter', () => {
+  it('should say "good night" at midnight', () => {
+    const greeter = new Greeter()
+    jest.spyOn(greeter.clock, 'currentHour').mockReturnValue(0)
+    expect(greeter.greet()).toBe('Good night')
+  })
+
+  it.each(Array.from(Array(24).keys()))('should never return undefined', (h) => {
+    const greeter = new Greeter()
+    jest.spyOn(greeter.clock, 'currentHour').mockReturnValue(h)
+    expect(greeter.greet()).not.toBeUndefined()
+  })
 })
 
-test('should never return undefined', (t) => {
-  // TODO : for each hour from 0 to 23, check that Greeter.greet()
-  // never returns undefined
-  t.fail('TODO')
-  t.end()
-})

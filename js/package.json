@@ -11,6 +11,7 @@
     "format": "standard --fix"
   },
   "devDependencies": {
+    "jest": "^29.3.1",
     "standard": "^17.0.0",
     "tap-spec": "^5.0.0",
     "tape": "^5.5.3"
