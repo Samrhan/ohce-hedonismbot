@@ -1,17 +1,16 @@
-const test = require('tape')
+const UI = require('../ui').UI
 
-test('main loop', (t) => {
-  /* TODO
-    Given the following inputs:
-    - hello
-    - oto
-    - quit
-
-    Check that the following messages are printed:
-    - olleh
-    - oto
-    - That was a palindrome!
-   */
-  t.fail('TODO')
-  t.end()
+describe('UI', () => {
+  it('main loop', () => {
+    const ui = new UI();
+    jest.spyOn(ui.interactor, 'printMessage');
+    jest.spyOn(ui.interactor, 'readInput').mockReturnValueOnce('hello').mockReturnValueOnce('oto').mockReturnValueOnce('quit');
+    ui.mainLoop();
+    expect(ui.interactor.readInput).toHaveBeenCalledTimes(3)
+    expect(ui.interactor.printMessage).toHaveBeenCalledTimes(3);
+    expect(ui.interactor.printMessage).toHaveBeenNthCalledWith(1, 'olleh');
+    expect(ui.interactor.printMessage).toHaveBeenNthCalledWith(2, 'oto');
+    expect(ui.interactor.printMessage).toHaveBeenNthCalledWith(3, 'That was a palindrome!');
+  })
 })
+
